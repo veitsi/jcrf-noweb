@@ -71,37 +71,6 @@ public class Jcrf {
 		vst.add(new Visit(1, 2, 365));
 		vst.add(new Visit(2, 1, 364));
 	}
-
-	public void storeAsBinar() {
-		FileOutputStream fos;
-		try {
-			fos = new FileOutputStream("jcrf-bin.out");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(this);
-			oos.flush();
-			oos.close();
-			System.out.println("jcrf is OK!");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void load(Jcrf jcrf) {
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream("jcrf-bin.out");
-			ObjectInputStream oin = new ObjectInputStream(fis);
-			jcrf = (Jcrf) oin.readObject();
-			vst=jcrf.vst;
-			oin.close();
-
-		} 
-		catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.println("in load "+jcrf.vst);
-	}
-
 }
 
 class Visit implements Serializable {
