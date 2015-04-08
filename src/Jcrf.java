@@ -16,64 +16,68 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Jcrf implements Serializable {
+public class Jcrf {
 	@XmlElement
-	private static final long serialVersionUID = -517189538141551534L;
-
+	Jcrf jcrf;
 	@XmlElement
 	ArrayList<Visit> vst = new ArrayList<Visit>();
+	
+	public Jcrf(){
+		super();
+	}
 
-	public static void main(String[] args) {
+ 	public static void main(String[] args) {
 		Jcrf jcrf = new Jcrf();
-		// Jcrf.addTestData(jcrf);
+		//jcrf.addTestData();
 
 		System.out.println(jcrf.vst);
 
-		// Jcrf.toXml(jcrf);
-		// Jcrf.fromXml(jcrf);
+		// jcrf.toXml();
+		 jcrf.fromXml();
 
 		// Jcrf.store(jcrf);
-		Jcrf.load(jcrf);
+		//Jcrf.load(jcrf);
 
 		System.out.println(jcrf.vst);
 	}
 
-	public static void toXml(Jcrf jcrf) {
+	public void toXml() {
 		try {
-			File file = new File("file.xml");
+			File file = new File("jcrf.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Jcrf.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller(); // output
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			jaxbMarshaller.marshal(jcrf, file);
-			jaxbMarshaller.marshal(jcrf, System.out);
+			jaxbMarshaller.marshal(this, file);
+			jaxbMarshaller.marshal(this, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void fromXml(Jcrf jcrf) {
+	public void fromXml() {
 		try {
-			File file = new File("file.xml");
+			File file = new File("jcrf.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Jcrf.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			jcrf = (Jcrf) jaxbUnmarshaller.unmarshal(file);
+			vst=jcrf.vst;
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void addTestData(Jcrf jcrf) {
-		jcrf.vst.add(new Visit(1, 1, 366));
-		jcrf.vst.add(new Visit(1, 2, 365));
-		jcrf.vst.add(new Visit(2, 1, 364));
+	public void addTestData() {
+		vst.add(new Visit(1, 1, 366));
+		vst.add(new Visit(1, 2, 365));
+		vst.add(new Visit(2, 1, 364));
 	}
 
-	public static void store(Jcrf jcrf) {
+	public void storeAsBinar() {
 		FileOutputStream fos;
 		try {
-			fos = new FileOutputStream("temp.out");
+			fos = new FileOutputStream("jcrf-bin.out");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(jcrf);
+			oos.writeObject(this);
 			oos.flush();
 			oos.close();
 			System.out.println("jcrf is OK!");
@@ -82,12 +86,13 @@ public class Jcrf implements Serializable {
 		}
 	}
 
-	public static void load(Jcrf jcrf) {
+	public void load(Jcrf jcrf) {
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("temp.out");
+			fis = new FileInputStream("jcrf-bin.out");
 			ObjectInputStream oin = new ObjectInputStream(fis);
 			jcrf = (Jcrf) oin.readObject();
+			vst=jcrf.vst;
 			oin.close();
 
 		} 
@@ -100,8 +105,6 @@ public class Jcrf implements Serializable {
 }
 
 class Visit implements Serializable {
-	@XmlElement
-	private static final long serialVersionUID = 2871028816981853938L;
 	@XmlElement
 	int ptn;
 	@XmlElement
