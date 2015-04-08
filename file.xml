@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jcrf>
+    <serialVersionUID>-517189538141551534</serialVersionUID>
+    <vst>
+        <serialVersionUID>2871028816981853938</serialVersionUID>
+        <ptn>1</ptn>
+        <nmr>1</nmr>
+        <dt>2015-04-06T13:12:36.733+03:00</dt>
+        <ttr>366</ttr>
+    </vst>
+    <vst>
+        <serialVersionUID>2871028816981853938</serialVersionUID>
+        <ptn>1</ptn>
+        <nmr>2</nmr>
+        <dt>2015-04-06T13:12:36.733+03:00</dt>
+        <ttr>365</ttr>
+    </vst>
+    <vst>
+        <serialVersionUID>2871028816981853938</serialVersionUID>
+        <ptn>2</ptn>
+        <nmr>1</nmr>
+        <dt>2015-04-06T13:12:36.733+03:00</dt>
+        <ttr>364</ttr>
+    </vst>
+</jcrf>
